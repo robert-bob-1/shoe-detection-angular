@@ -1,0 +1,25 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-name {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+.custom-button {
+    font-size: 16px; /* Increase text size */
+    border: 2px solid white; /* Optional: add a border */
+    padding: 10px 20px; /* Optional: increase padding */
+}

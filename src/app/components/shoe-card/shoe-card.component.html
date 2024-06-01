@@ -1,0 +1,23 @@
+<mat-card class="shoe-card">
+    <mat-card-header>
+        <mat-card-title>{{ shoe.brand }}</mat-card-title>
+        <mat-card-subtitle>{{ shoe.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="carousel">
+            <button mat-icon-button
+                *ngIf="isPreviousPhotoAvailable()"
+                (click)="previousPhoto()">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            <img [src]="shoe.photos[currentPhotoIndex]" alt="Shoe photo">
+            <button mat-icon-button
+                *ngIf="isNextPhotoAvailable()"
+                (click)="nextPhoto()">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </div>
+        <p class="price">${{ shoe.price }}</p>
+        <a [href]="shoe.url" target="_blank">Buy Now</a>
+    </mat-card-content>
+</mat-card>

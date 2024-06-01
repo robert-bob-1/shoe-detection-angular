@@ -1,0 +1,27 @@
+.shoe-card {
+    max-width: 400px;
+    margin: auto;
+  }
+
+  .carousel {
+    display: flex;
+    align-items: center;
+  }
+
+  .carousel img {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+
+  .price {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #3f51b5;
+  }
