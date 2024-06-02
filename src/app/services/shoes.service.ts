@@ -16,9 +16,13 @@ export class ShoesService {
         private httpClient: HttpClient
     ) { }
 
-    getShoes(page = 1, page_size = 3): Observable<Shoe[]> {
+    getShoes(page = 1, page_size = 5): Observable<{ shoes: Shoe[], totalPages: number }> {
         return this.httpClient.get<GetShoesResponse>(`${this.url}get-all/?page=${page}&page_size=${page_size}`).pipe(
-            map((response: GetShoesResponse) => mapGetShoesResponse(response))
-        )
+            map((response: GetShoesResponse) => {
+                const shoes = mapGetShoesResponse(response);
+                const totalPages = response.pages;
+                return { shoes, totalPages };
+            })
+        );
     }
 }

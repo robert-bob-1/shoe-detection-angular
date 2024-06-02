@@ -14,7 +14,7 @@ export interface ShoeResponse {
 
 export interface GetShoesResponse {
     page: number;
-    page_size: number;
+    pages: number;
     total: number;
     shoes: ShoeResponse[];
 }

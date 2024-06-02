@@ -2,6 +2,12 @@
     fxLayout="row"
     fxLayoutGap="10px"
     fxLayoutWrap>
-    <shoe-card *ngFor="let shoe of shoes" [shoe]="shoe">
-    </shoe-card>
+    <loading-mask *ngIf="loadingInitial"/>
+    <shoe-card *ngFor="let shoe of shoes" [shoe]="shoe" />
+
+    <div appShoeScroll
+        *ngIf="!loadingInitial && arePagesLeft()"
+        (reachedBottom)="onReachingBottom()">
+        <loading-mask/>
+    </div>
 </div>
