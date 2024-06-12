@@ -1,0 +1,30 @@
+<div class="image-uploader">
+    <button mat-raised-button
+        color="primary"
+        class="custom-button"
+        (click)="fileInput.click()">
+        Upload Image
+    </button>
+    <input type="file" #fileInput (change)="onFileSelected($event)" hidden>
+    <div *ngIf="selectedFile">
+        <img [src]="imagePreview" alt="Image Preview" class="image-preview">
+        <p>{{ selectedFile.name }}</p>
+    </div>
+    <div *ngIf="selectedFile"
+        class="functions-container">
+        <span class="app-name">Functions</span>
+        <button mat-raised-button
+            color="primary"
+            class="custom-button"
+            (click)="onComputeColorSimilarity()">
+            Compute color similarity
+        </button>
+
+        <button mat-raised-button
+            color="primary"
+            class="custom-button"
+            (click)="onComputeShoeTypes()">
+            Compute shoe types
+        </button>
+    </div>
+</div>

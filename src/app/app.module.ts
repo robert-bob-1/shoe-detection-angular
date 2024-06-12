@@ -17,6 +17,7 @@ import { ShoeCardListComponent } from './components/shoe-card-list/shoe-card-lis
 import { HttpClientModule } from '@angular/common/http';
 import { ShoeScrollDirective } from './directives/shoe-scroll.directive';
 import { LoadingMaskComponent } from './components/loading-mask/loading-mask.component';
+import { ShoeUploadComponent } from './components/shoe-upload/shoe-upload.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { LoadingMaskComponent } from './components/loading-mask/loading-mask.com
         ShoeCardComponent,
         ShoeCardListComponent,
         ShoeScrollDirective,
-        LoadingMaskComponent
+        LoadingMaskComponent,
+        ShoeUploadComponent
     ],
     imports: [
         BrowserModule,
