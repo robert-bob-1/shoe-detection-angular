@@ -17,7 +17,7 @@ export class EvaluatorService {
         private httpClient: HttpClient
     ) { }
 
-    computeColorSimilarity(imageBase64: string): Observable<{ shoes: Shoe[], totalPages: number }> {
+    findSimilarImages(imageBase64: string): Observable<{ shoes: Shoe[], totalPages: number }> {
         const imageBlob = this.dataURItoBlob(imageBase64);
         const formData = new FormData();
         formData.append('image', imageBlob);
@@ -32,13 +32,18 @@ export class EvaluatorService {
         );
     }
 
-    getShoeTypes(imageBase64: string): Observable<GetShoeTypesResponse> {
+    getShoeTypes(imageBase64: string): Observable<{ [key: string]: number }> {
         const imageBlob = this.dataURItoBlob(imageBase64);
         const formData = new FormData();
         formData.append('image', imageBlob);
 
         return this.httpClient.post<GetShoeTypesResponse>(`${this.url}shoe-types/`, formData).pipe(
-            tap(response => console.log(response))
+            tap(response => console.log(response)),
+            map(response => {
+                const shoeTypesDict = response.shoeTypes;
+
+                return shoeTypesDict;
+            })
         );
     }
 

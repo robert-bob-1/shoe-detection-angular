@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ShoeCardListComponent } from './components/shoe-card-list/shoe-card-list.component';
-import { ShoeUploadComponent } from './components/shoe-upload/shoe-upload.component';
+import { ShoesBrowserModule } from './shoes-browser/shoes-browser.module';
 
 const routes: Routes = [
     { path: '', redirectTo: '/shoes', pathMatch: 'full' },
-    { path: 'shoes', component: ShoeCardListComponent },
-    { path: 'upload', component: ShoeUploadComponent }
+    { path: 'shoes', pathMatch: 'full', loadChildren: () => import('./shoes-browser/shoes-browser.module').then(m => m.ShoesBrowserModule) },
+    // { path: 'upload', component: ShoeUploadComponent }
 ];
 
 @NgModule({

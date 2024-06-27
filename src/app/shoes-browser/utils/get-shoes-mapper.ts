@@ -4,7 +4,7 @@ import { Shoe } from '../models/shoe-model';
 const imagePrefix = 'data:image/jpeg;base64,';
 
 export function mapGetShoesResponse(response: GetShoesResponse): Shoe[] {
-    return response.shoes.map(shoe => {
+    return response.content.map(shoe => {
         return {
             name: shoe.name,
             brand: shoe.brand,

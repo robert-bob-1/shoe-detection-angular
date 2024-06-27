@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { shoePlaceholder } from 'src/app/constants/shoe-placeholder';
-import { Shoe } from 'src/app/models/shoe-model';
-import { ShoesService } from 'src/app/services/shoes.service';
+import { Shoe } from '../../models/shoe-model';
+import { ShoesMetadataService } from '../../services/shoes-metadata.service';
 
 @Component({
     selector: 'shoe-card-list',
@@ -11,6 +10,8 @@ import { ShoesService } from 'src/app/services/shoes.service';
     styleUrls: ['./shoe-card-list.component.scss']
 })
 export class ShoeCardListComponent implements OnInit {
+    // @Input() shoeList: Shoe[] = [];
+
     shoes: Shoe[] = [];
     loadingInitial = true;
     loadingScroll = false;
@@ -22,12 +23,12 @@ export class ShoeCardListComponent implements OnInit {
     private subscription: Subscription = new Subscription();
 
     constructor(
-        private readonly shoesService: ShoesService
+        private readonly shoesMetadataService: ShoesMetadataService
     ) {}
 
     ngOnInit() {
         this.subscription.add(
-            this.shoesService.getShoes(1, this.pageSize).subscribe(({ shoes, totalPages }) => {
+            this.shoesMetadataService.getShoes(1, this.pageSize).subscribe(({ shoes, totalPages }) => {
                 this.totalPages = totalPages;
                 this.loadingInitial = false;
                 this.shoes = shoes;
@@ -40,7 +41,7 @@ export class ShoeCardListComponent implements OnInit {
         this.page++;
 
         this.subscription.add(
-            this.shoesService.getShoes(this.page, this.pageSize).subscribe(({ shoes }) => {
+            this.shoesMetadataService.getShoes(this.page, this.pageSize).subscribe(({ shoes }) => {
                 this.shoes = this.shoes.concat(shoes);
                 this.loadingScroll = false;
             })

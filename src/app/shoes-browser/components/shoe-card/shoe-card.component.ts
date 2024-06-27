@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { shoePlaceholder } from 'src/app/constants/shoe-placeholder';
+import { shoePlaceholder } from '../../constants/shoe-placeholder';
 
-import { Shoe } from 'src/app/models/shoe-model';
+import { Shoe } from '../../models/shoe-model';
 
 @Component({
     selector: 'shoe-card',

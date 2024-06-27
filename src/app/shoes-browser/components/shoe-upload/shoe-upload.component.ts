@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { EvaluatorService } from 'src/app/services/evaluator.service';
+import { EvaluatorService } from '../../services/evaluator.service';
 
 @Component({
     selector: 'shoe-upload',
@@ -10,6 +10,8 @@ import { EvaluatorService } from 'src/app/services/evaluator.service';
 export class ShoeUploadComponent {
     selectedFile: File | null = null;
     imagePreview: string | ArrayBuffer | null = '';
+
+    currentShoeTypes: { [key: string]: number; } = {};
 
     constructor(
         private evaluatorService: EvaluatorService
@@ -32,9 +34,9 @@ export class ShoeUploadComponent {
     onComputeColorSimilarity(): void {
         if (this.imagePreview && typeof this.imagePreview === 'string') {
             // Call the service to compute the color similarity
-            this.evaluatorService.computeColorSimilarity(this.imagePreview).subscribe(response => {
-                console.log(response);
-            });
+            // this.evaluatorService.computeColorSimilarity(this.imagePreview).subscribe(response => {
+            //     console.log(response);
+            // });
         } else {
             console.error('No image selected or incorrect imagePreview type.');
         }
@@ -43,8 +45,8 @@ export class ShoeUploadComponent {
     onComputeShoeTypes(): void {
         if (this.imagePreview && typeof this.imagePreview === 'string') {
             // Call the service to compute the shoe types
-            this.evaluatorService.getShoeTypes(this.imagePreview).subscribe(response => {
-                console.log(response);
+            this.evaluatorService.getShoeTypes(this.imagePreview).subscribe(shoeTypesDict => {
+                this.currentShoeTypes = shoeTypesDict;
             });
         } else {
             console.error('No image selected or incorrect imagePreview type.');

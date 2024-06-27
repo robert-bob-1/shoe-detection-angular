@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -11,34 +12,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { ShoeCardComponent } from './components/shoe-card/shoe-card.component';
-import { ShoeCardListComponent } from './components/shoe-card-list/shoe-card-list.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ShoeScrollDirective } from './directives/shoe-scroll.directive';
-import { LoadingMaskComponent } from './components/loading-mask/loading-mask.component';
-import { ShoeUploadComponent } from './components/shoe-upload/shoe-upload.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ToolbarComponent,
-        ShoeCardComponent,
-        ShoeCardListComponent,
-        ShoeScrollDirective,
-        LoadingMaskComponent,
-        ShoeUploadComponent
     ],
     imports: [
+        CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
         MatButtonModule,
-        MatCardModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatProgressSpinnerModule,
+        MatToolbarModule
     ],
     providers: [],
     bootstrap: [AppComponent]

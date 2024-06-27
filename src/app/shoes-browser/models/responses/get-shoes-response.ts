@@ -13,10 +13,17 @@ export interface ShoeResponse {
 }
 
 export interface GetShoesResponse {
-    page: number;
-    pages: number;
-    total: number;
-    shoes: ShoeResponse[];
+    totalPages: number;
+    totalElements: number;
+    numberOfElements: number;
+    size: number;
+
+    first: boolean;
+    last: boolean;
+    empty: boolean;
+
+    content: ShoeResponse[];
+
 }
 
 export interface ShoeWithImageResponse {

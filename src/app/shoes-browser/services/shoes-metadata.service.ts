@@ -9,18 +9,18 @@ import { mapGetShoesResponse } from '../utils/get-shoes-mapper';
 @Injectable({
     providedIn: 'root'
 })
-export class ShoesService {
-    url = 'http://localhost:8080/shoes/';
+export class ShoesMetadataService {
+    url = 'http://localhost:8082/api/';
 
     constructor(
         private httpClient: HttpClient
     ) { }
 
     getShoes(page = 1, page_size = 5): Observable<{ shoes: Shoe[], totalPages: number }> {
-        return this.httpClient.get<GetShoesResponse>(`${this.url}get-all/?page=${page}&page_size=${page_size}`).pipe(
+        return this.httpClient.get<GetShoesResponse>(`${this.url}shoe-metadata?page=${page}&size=${page_size}`).pipe(
             map((response: GetShoesResponse) => {
                 const shoes = mapGetShoesResponse(response);
-                const totalPages = response.pages;
+                const totalPages = response.totalPages;
                 return { shoes, totalPages };
             })
         );
