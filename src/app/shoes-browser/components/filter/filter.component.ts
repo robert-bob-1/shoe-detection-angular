@@ -5,6 +5,8 @@ import { Website } from 'src/app/home/models/website';
 
 import { ShoeType, shoeTypesBackendMap } from 'src/app/shared/models/shoe-types';
 import { WebsiteService } from 'src/app/shared/services/website.service';
+import { Filters } from '../../models/filters';
+import { ShoesMetadataService } from '../../services/shoes-metadata.service';
 
 @Component({
     selector: 'filter',
@@ -19,13 +21,14 @@ export class FilterComponent implements OnInit {
     selectedShoeTypes: string[] = [];
 
     websites: Website[] = [];
-    selectedWebsite: string | null = null;
+    selectedWebsite: string | undefined = undefined;
 
-    selectedBrand: string | null = null;
+    selectedBrand: string | undefined = undefined;
 
-    selectedColor: string | null = null;
+    selectedColor: string | undefined = undefined;
 
     constructor(
+        private readonly shoeMetadataService: ShoesMetadataService,
         private websiteService: WebsiteService
     ) { }
 
@@ -66,6 +69,15 @@ export class FilterComponent implements OnInit {
     }
 
     onApplyFilters(): void {
-        console.log('Filter applied');
+        const filters: Filters = {
+            minPrice: this.minPrice,
+            maxPrice: this.maxPrice,
+            shoeTypes: this.selectedShoeTypes,
+            website: this.selectedWebsite,
+            brand: this.selectedBrand,
+            color: this.selectedColor
+        };
+
+        this.shoeMetadataService.applyFilters(filters);
     }
 }

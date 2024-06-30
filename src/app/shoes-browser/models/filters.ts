@@ -1,6 +1,6 @@
 export interface Filters {
     website?: string;
-    shoeType?: string;
+    shoeTypes?: string[];
     minPrice?: number;
     maxPrice?: number;
     brand?: string;
