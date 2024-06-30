@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { WebsiteResponse } from '../models/responses';
-import { Observable, map } from 'rxjs';
-import { Website } from '../models/website';
+import { WebsiteResponse } from '../../home/models/responses';
+import { Observable, map, shareReplay } from 'rxjs';
+import { Website } from '../../home/models/website';
 
 @Injectable({
     providedIn: 'root'
@@ -10,12 +10,18 @@ import { Website } from '../models/website';
 export class WebsiteService {
     url = 'http://localhost:8082/api/website';
 
+    private cachedWebsites$: Observable<Website[]> | null = null;
+
     constructor(
         private httpClient: HttpClient
     ) { }
 
     getWebsites(): Observable<Website[]> {
-        return this.httpClient.get<WebsiteResponse[]>(this.url).pipe(
+        if (this.cachedWebsites$) {
+            return this.cachedWebsites$;
+        }
+
+        this.cachedWebsites$ = this.httpClient.get<WebsiteResponse[]>(this.url).pipe(
             map((response: WebsiteResponse[]) => {
                 return response.map((website: WebsiteResponse) => {
                     return {
@@ -24,7 +30,10 @@ export class WebsiteService {
                         logo: website.logo
                     };
                 });
-            })
+            }),
+            shareReplay(1)
         );
+
+        return this.cachedWebsites$;
     }
 }

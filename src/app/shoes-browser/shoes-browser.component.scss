@@ -1,0 +1,10 @@
+.shoe-browser-container {
+    display: flex;
+    height: 100vh;
+}
+
+@media (max-width: 1000px) {
+    .shoe-browser-container {
+        flex-direction: column;
+    }
+}

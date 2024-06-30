@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WebsiteService } from '../../services/website.service';
+import { WebsiteService } from '../../../shared/services/website.service';
 import { Website } from '../../models/website';
 
 @Component({
