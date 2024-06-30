@@ -1,0 +1,10 @@
+<div>
+    <loading-mask *ngIf="loading"
+        message="Loading available websites..."
+    ></loading-mask>
+    <div *ngIf="!loading"
+        class="website-grid-container">
+        <div *ngFor="let website of websites">
+            <website-card [website]="website"></website-card>
+        </div>
+</div>

@@ -1,0 +1,24 @@
+.website-card {
+    height: 250px;
+    width: 400px;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.website-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+mat-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.website-logo {
+    max-width: 100%; /* Ensure image never exceeds card width */
+    height: auto;     /* Maintain aspect ratio based on width */
+    display: block;   /* Prevent spacing issues below the image */
+}

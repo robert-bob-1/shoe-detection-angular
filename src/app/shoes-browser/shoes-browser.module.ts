@@ -5,15 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { LoadingMaskComponent } from './components/loading-mask/loading-mask.component';
 import { ShoeCardListComponent } from './components/shoe-card-list/shoe-card-list.component';
 import { ShoeCardComponent } from './components/shoe-card/shoe-card.component';
 import { ShoeUploadComponent } from './components/shoe-upload/shoe-upload.component';
 import { ShoeScrollDirective } from './directives/shoe-scroll.directive';
 import { ShoesBrowserRoutingModule } from './shoes-browser-routing.module';
+import { SharedModule } from '../shared/shared/shared.module';
 
 
 
@@ -23,9 +22,7 @@ import { ShoesBrowserRoutingModule } from './shoes-browser-routing.module';
         ShoeCardComponent,
         ShoeCardListComponent,
         ShoeScrollDirective,
-        LoadingMaskComponent,
         ShoeUploadComponent
-
     ],
     imports: [
         CommonModule,
@@ -35,7 +32,7 @@ import { ShoesBrowserRoutingModule } from './shoes-browser-routing.module';
         MatCardModule,
         MatIconModule,
         MatToolbarModule,
-        MatProgressSpinnerModule,
+        SharedModule
     ]
 })
 export class ShoesBrowserModule { }

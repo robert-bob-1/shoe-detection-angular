@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+@import 'src/styles.scss';
+@import 'src/styles/buttons.scss';
+@import 'src/styles/text.scss';
+
+.top-header{
+    background-color: mat.get-color-from-palette($shoespotter-primary, 800);
+    color: white;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.main-container{
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}

@@ -1,0 +1,10 @@
+
+<mat-card class="website-card"
+    (click)="redirectToWebsite()">
+    <mat-card-header>
+        <h3>{{website.name}}</h3>
+    </mat-card-header>
+    <mat-card-content>
+        <img [src]="'data:image/png;base64,' + website.logo" alt="{{website.name}}" class="website-logo">
+    </mat-card-content>
+</mat-card>
