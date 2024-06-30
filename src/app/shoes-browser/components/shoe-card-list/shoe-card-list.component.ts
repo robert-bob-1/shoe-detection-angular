@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Shoe } from '../../models/shoe-model';
@@ -7,7 +7,8 @@ import { ShoesMetadataService } from '../../services/shoes-metadata.service';
 @Component({
     selector: 'shoe-card-list',
     templateUrl: './shoe-card-list.component.html',
-    styleUrls: ['./shoe-card-list.component.scss']
+    styleUrls: ['./shoe-card-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoeCardListComponent implements OnInit {
     // @Input() shoeList: Shoe[] = [];
@@ -23,7 +24,8 @@ export class ShoeCardListComponent implements OnInit {
     private subscription: Subscription = new Subscription();
 
     constructor(
-        private readonly shoesMetadataService: ShoesMetadataService
+        private readonly shoesMetadataService: ShoesMetadataService,
+        private changeDetectorRef: ChangeDetectorRef
     ) {}
 
     ngOnInit() {
@@ -32,6 +34,7 @@ export class ShoeCardListComponent implements OnInit {
                 this.totalPages = totalPages;
                 this.loadingInitial = false;
                 this.shoes = shoes;
+                this.changeDetectorRef.markForCheck();
             })
         );
     }
@@ -44,6 +47,7 @@ export class ShoeCardListComponent implements OnInit {
             this.shoesMetadataService.getShoes(this.page, this.pageSize).subscribe(({ shoes }) => {
                 this.shoes = this.shoes.concat(shoes);
                 this.loadingScroll = false;
+                this.changeDetectorRef.markForCheck();
             })
         );
     }
