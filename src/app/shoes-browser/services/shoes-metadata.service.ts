@@ -47,38 +47,4 @@ export class ShoesMetadataService {
             })
         );
     }
-
-    // getShoes(page = 1, page_size = 5): Observable<{ shoes: Shoe[], totalPages: number }> {
-    //     return this.filters$.pipe(
-    //         switchMap(filters => {
-    //             const urlParams = new URLSearchParams({
-    //                 page: page.toString(),
-    //                 size: page_size.toString()
-    //             });
-
-    //             Object.entries(filters).forEach(([key, value]) => {
-    //                 if (value !== undefined && value !== '') {
-    //                     urlParams.set(key, value);
-    //                 }
-    //             });
-
-    //             return this.httpClient.get<GetShoesResponse>(`${this.url}shoe-metadata?${urlParams.toString()}`).pipe(
-    //                 map((response: GetShoesResponse) => {
-    //                     const shoes = mapGetShoesResponse(response);
-    //                     const totalPages = response.totalPages;
-    //                     return { shoes, totalPages };
-    //                 })
-    //             );
-    //         }),
-    //         shareReplay(1)
-    //     );
-
-    //     // return this.httpClient.get<GetShoesResponse>(`${this.url}shoe-metadata?page=${page}&size=${page_size}`).pipe(
-    //     //     map((response: GetShoesResponse) => {
-    //     //         const shoes = mapGetShoesResponse(response);
-    //     //         const totalPages = response.totalPages;
-    //     //         return { shoes, totalPages };
-    //     //     })
-    //     // );
-    // }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { EvaluatorService } from '../../services/evaluator.service';
+import { ShoeAndConfidence } from '../../models/shoes';
 
 @Component({
     selector: 'shoe-upload',
@@ -8,10 +9,13 @@ import { EvaluatorService } from '../../services/evaluator.service';
     styleUrls: ['./shoe-upload.component.scss']
 })
 export class ShoeUploadComponent {
+    loading = false;
+
     selectedFile: File | null = null;
     imagePreview: string | ArrayBuffer | null = '';
 
     currentShoeTypes: { [key: string]: number; } = {};
+    similarShoes: ShoeAndConfidence[] = [];
 
     constructor(
         private evaluatorService: EvaluatorService
@@ -31,22 +35,28 @@ export class ShoeUploadComponent {
         }
     }
 
-    onComputeColorSimilarity(): void {
+    onComputeShoeTypes(): void {
+        this.loading = true;
         if (this.imagePreview && typeof this.imagePreview === 'string') {
-            // Call the service to compute the color similarity
-            // this.evaluatorService.computeColorSimilarity(this.imagePreview).subscribe(response => {
-            //     console.log(response);
-            // });
+            // Call the service to compute the shoe types
+            this.evaluatorService.getShoeTypes(this.imagePreview).subscribe(shoeTypesDict => {
+                this.currentShoeTypes = shoeTypesDict;
+                this.loading = false;
+            });
         } else {
             console.error('No image selected or incorrect imagePreview type.');
         }
     }
 
-    onComputeShoeTypes(): void {
+    onFindSimilarShoes(): void {
+        this.loading = true;
+
         if (this.imagePreview && typeof this.imagePreview === 'string') {
-            // Call the service to compute the shoe types
-            this.evaluatorService.getShoeTypes(this.imagePreview).subscribe(shoeTypesDict => {
-                this.currentShoeTypes = shoeTypesDict;
+            // Call the service to find similar shoes
+            this.evaluatorService.findSimilarImages(this.imagePreview).subscribe(response => {
+                console.log(response);
+                this.similarShoes = response;
+                this.loading = false;
             });
         } else {
             console.error('No image selected or incorrect imagePreview type.');

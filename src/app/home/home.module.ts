@@ -8,7 +8,7 @@ import { HomeComponent } from './home.component';
 import { WebsiteCardComponent } from './components/website-card/website-card.component';
 import { HomeContentComponent } from './components/home-content/home-content.component';
 import { HomeTitleComponent } from './components/home-title/home-title.component';
-import { SharedModule } from '../shared/shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({

@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, tap } from 'rxjs';
 
-import { Shoe } from '../models/shoe-model';
-import { GetShoesWithImageResponse } from '../models/responses/get-shoes-response';
-import { mapGetShoesWithImageResponse } from '../utils/get-shoes-mapper';
-import { GetShoeTypesResponse } from '../models/responses/get-shoe-types-response';
+import { GetShoeTypesResponse } from '../../shoes-browser/models/responses/get-shoe-types-response';
+import { GetSimilarShoesResponse } from '../models/responses';
+import { ShoeAndConfidence } from '../models/shoes';
+import { mapGetSimilarShoesResponse } from '../utils/mappers';
 
 @Injectable({
     providedIn: 'root'
@@ -17,17 +17,17 @@ export class EvaluatorService {
         private httpClient: HttpClient
     ) { }
 
-    findSimilarImages(imageBase64: string): Observable<{ shoes: Shoe[], totalPages: number }> {
+    findSimilarImages(imageBase64: string): Observable<ShoeAndConfidence[]> {
         const imageBlob = this.dataURItoBlob(imageBase64);
         const formData = new FormData();
         formData.append('image', imageBlob);
 
-        return this.httpClient.post<GetShoesWithImageResponse>(`${this.url}color-similarity/`, formData).pipe(
-            map((response: GetShoesWithImageResponse) => {
+        return this.httpClient.post<GetSimilarShoesResponse>(`${this.url}all_properties_no_classification/`, formData).pipe(
+            map((response: GetSimilarShoesResponse) => {
                 console.log(response);
-                const shoes = mapGetShoesWithImageResponse(response);
-                const totalPages = response.pages;
-                return { shoes, totalPages };
+                const shoeAndConfidenceList = mapGetSimilarShoesResponse(response);
+                console.log('converted response:', shoeAndConfidenceList)
+                return shoeAndConfidenceList;
             })
         );
     }

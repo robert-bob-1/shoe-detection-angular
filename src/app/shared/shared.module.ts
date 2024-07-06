@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { LoadingMaskComponent } from '../components/loading-mask/loading-mask.component';
+import { LoadingMaskComponent } from './components/loading-mask/loading-mask.component';
 
 
 

@@ -1,0 +1,47 @@
+<div class="image-uploader">
+    <p class="big-bold-text white">Upload an image of a shoe to find similar shoes</p>
+    <button mat-raised-button
+        color="primary"
+        class="accent-button function-button"
+        (click)="fileInput.click()">
+        Upload Image
+    </button>
+    <input type="file" #fileInput (change)="onFileSelected($event)" hidden>
+    <div *ngIf="selectedFile">
+        <img [src]="imagePreview" alt="Image Preview" class="image-preview">
+        <p class="small-bold-text white">{{ selectedFile.name }}</p>
+    </div>
+
+    <div *ngIf="selectedFile"
+        class="functions-container">
+
+        <span class="big-bold-text white centered">Functions</span>
+
+        <button mat-raised-button
+            color="primary"
+            class="accent-button function-button"
+            style="margin: 1rem"
+            (click)="onFindSimilarShoes()">
+            Find most similar shoes
+        </button>
+
+        <button mat-raised-button
+            color="primary"
+            class="accent-button function-button"
+            style="margin: 1rem"
+            (click)="onComputeShoeTypes()">
+            Compute shoe types
+        </button>
+    </div>
+</div>
+
+<loading-mask *ngIf="loading"
+    message="Loading similar shoes..."></loading-mask>
+
+<div class="shoe-card-list-container">
+    <div *ngFor="let shoeConfidencePair of similarShoes"
+        class="shoe-card-confidence-container">
+        <shoe-card [shoe]="shoeConfidencePair.shoe"></shoe-card>
+        <p class="small-bold-text">{{ shoeConfidencePair.confidence }}% Match</p>
+    </div>
+</div>
