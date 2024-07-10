@@ -9,6 +9,7 @@ import { Website } from '../../home/models/website';
 })
 export class WebsiteService {
     url = 'http://localhost:8082/api/website';
+    // url = 'http://192.168.1.129:8082/api/website';
 
     private cachedWebsites$: Observable<Website[]> | null = null;
 

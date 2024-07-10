@@ -25,18 +25,24 @@
             Find most similar shoes
         </button>
 
-        <button mat-raised-button
-            color="primary"
-            class="accent-button function-button"
-            style="margin: 1rem"
-            (click)="onComputeShoeTypes()">
-            Compute shoe types
-        </button>
+
+    </div>
+
+    <div *ngIf="similarShoes.length>0 && !loading && errorMessage===''"
+        class="functions-container">
+        <p class="small-bold-text white centered">{{ processingMessage }}</p>
     </div>
 </div>
 
-<loading-mask *ngIf="loading"
-    message="Loading similar shoes..."></loading-mask>
+<div *ngIf="loading">
+    <loading-mask *ngIf="loading"
+        message="Loading similar shoes...">
+    </loading-mask>
+</div>
+
+<div *ngIf="errorMessage!==''">
+    <p class="small-bold-text">{{ errorMessage }}</p>
+</div>
 
 <div class="shoe-card-list-container">
     <div *ngFor="let shoeConfidencePair of similarShoes"

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 import { EvaluatorService } from '../../services/evaluator.service';
-import { ShoeAndConfidence } from '../../models/shoes';
+import { MessageShoesAndConfidence, ShoeAndConfidence } from '../../models/shoes';
+import { catchError, of } from 'rxjs';
 
 @Component({
     selector: 'shoe-upload',
@@ -10,6 +11,9 @@ import { ShoeAndConfidence } from '../../models/shoes';
 })
 export class ShoeUploadComponent {
     loading = false;
+
+    processingMessage = '';
+    errorMessage  = '';
 
     selectedFile: File | null = null;
     imagePreview: string | ArrayBuffer | null = '';
@@ -28,6 +32,7 @@ export class ShoeUploadComponent {
             const reader = new FileReader();
             reader.onload = () => {
                 this.imagePreview = reader.result;
+                this.errorMessage = '';
                 //log the imagePreview type
                 console.log(typeof this.imagePreview);
             };
@@ -35,27 +40,26 @@ export class ShoeUploadComponent {
         }
     }
 
-    onComputeShoeTypes(): void {
-        this.loading = true;
-        if (this.imagePreview && typeof this.imagePreview === 'string') {
-            // Call the service to compute the shoe types
-            this.evaluatorService.getShoeTypes(this.imagePreview).subscribe(shoeTypesDict => {
-                this.currentShoeTypes = shoeTypesDict;
-                this.loading = false;
-            });
-        } else {
-            console.error('No image selected or incorrect imagePreview type.');
-        }
-    }
-
     onFindSimilarShoes(): void {
+        this.errorMessage = '';
         this.loading = true;
 
         if (this.imagePreview && typeof this.imagePreview === 'string') {
             // Call the service to find similar shoes
-            this.evaluatorService.findSimilarImages(this.imagePreview).subscribe(response => {
+            this.evaluatorService.findSimilarImages(this.imagePreview).pipe(
+                catchError(error => {
+                    console.error(error);
+                    this.loading = false;
+                    this.errorMessage = 'Error encountered: ' + error.error.error;
+                    return of({
+                        message: 'Error encountered: ' + error.error.error,
+                        shoeAndConfidenceList: []
+                    });
+                }),
+            ).subscribe((response: MessageShoesAndConfidence) => {
                 console.log(response);
-                this.similarShoes = response;
+                this.processingMessage = response.message;
+                this.similarShoes = response.shoeAndConfidenceList;
                 this.loading = false;
             });
         } else {

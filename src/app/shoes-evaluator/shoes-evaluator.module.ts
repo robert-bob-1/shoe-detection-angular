@@ -4,7 +4,6 @@ import { ShoesEvaluatorComponent } from './shoes-evaluator.component';
 import { ShoesEvaluatorRoutingModule } from './shoes-evaluator-routing.module';
 import { ShoeUploadComponent } from './components/shoe-upload/shoe-upload.component';
 import { SharedModule } from '../shared/shared.module';
-import { ShoesBrowserModule } from '../shoes-browser/shoes-browser.module';
 
 
 
@@ -16,8 +15,7 @@ import { ShoesBrowserModule } from '../shoes-browser/shoes-browser.module';
     imports: [
         CommonModule,
         ShoesEvaluatorRoutingModule,
-        SharedModule,
-        ShoesBrowserModule
+        SharedModule
     ]
 })
 export class ShoesEvaluatorModule { }

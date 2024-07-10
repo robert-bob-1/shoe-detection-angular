@@ -1,4 +1,4 @@
-import { Shoe } from "../models/shoe-model";
+import { Shoe } from "../../shared/models/shoe-model";
 
 export let shoePlaceholder: Shoe = {
     name: 'name',

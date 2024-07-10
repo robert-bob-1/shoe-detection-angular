@@ -1,5 +1,5 @@
 import { GetShoesResponse, GetShoesWithImageResponse } from '../models/responses/get-shoes-response';
-import { Shoe } from '../models/shoe-model';
+import { Shoe } from '../../shared/models/shoe-model';
 
 const imagePrefix = 'data:image/jpeg;base64,';
 

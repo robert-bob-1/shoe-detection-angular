@@ -13,7 +13,6 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ShoeCardListComponent } from './components/shoe-card-list/shoe-card-list.component';
-import { ShoeCardComponent } from './components/shoe-card/shoe-card.component';
 import { ShoeScrollDirective } from './directives/shoe-scroll.directive';
 import { ShoesBrowserRoutingModule } from './shoes-browser-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -25,7 +24,6 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
     declarations: [
         ShoesBrowserComponent,
-        ShoeCardComponent,
         ShoeCardListComponent,
         ShoeScrollDirective,
         FilterComponent
@@ -45,9 +43,6 @@ import { FormsModule } from '@angular/forms';
         MatSliderModule,
         MatToolbarModule,
         SharedModule
-    ],
-    exports: [
-        ShoeCardComponent,
     ]
 })
 export class ShoesBrowserModule { }

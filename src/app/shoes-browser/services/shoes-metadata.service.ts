@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, shareReplay, switchMap, tap } from 'rxjs';
 
-import { Shoe } from '../models/shoe-model';
+import { Shoe } from '../../shared/models/shoe-model';
 import { GetShoesResponse } from '../models/responses/get-shoes-response';
 import { mapGetShoesResponse } from '../utils/get-shoes-mapper';
 import { Filters } from '../models/filters';

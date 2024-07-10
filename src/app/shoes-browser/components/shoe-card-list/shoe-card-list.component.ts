@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription, combineLatest, switchMap, tap } from 'rxjs';
 
-import { Shoe } from '../../models/shoe-model';
+import { Shoe } from '../../../shared/models/shoe-model';
 import { ShoesMetadataService } from '../../services/shoes-metadata.service';
 
 @Component({

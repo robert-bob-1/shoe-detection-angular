@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 import { GetShoeTypesResponse } from '../../shoes-browser/models/responses/get-shoe-types-response';
 import { GetSimilarShoesResponse } from '../models/responses';
-import { ShoeAndConfidence } from '../models/shoes';
+import { MessageShoesAndConfidence, ShoeAndConfidence } from '../models/shoes';
 import { mapGetSimilarShoesResponse } from '../utils/mappers';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class EvaluatorService {
         private httpClient: HttpClient
     ) { }
 
-    findSimilarImages(imageBase64: string): Observable<ShoeAndConfidence[]> {
+    findSimilarImages(imageBase64: string): Observable<MessageShoesAndConfidence> {
         const imageBlob = this.dataURItoBlob(imageBase64);
         const formData = new FormData();
         formData.append('image', imageBlob);
@@ -27,9 +27,19 @@ export class EvaluatorService {
                 console.log(response);
                 const shoeAndConfidenceList = mapGetSimilarShoesResponse(response);
                 console.log('converted response:', shoeAndConfidenceList)
-                return shoeAndConfidenceList;
+                const responseMessage = response.message;
+                return {
+                    'message': responseMessage,
+                    'shoeAndConfidenceList': shoeAndConfidenceList
+                };
+            }),
+            catchError(error => {
+                return of({
+                    'message': 'Error encountered: ' + error.error.error,
+                    'shoeAndConfidenceList': []
+                });
             })
-        );
+        )  as Observable<MessageShoesAndConfidence>;
     }
 
     getShoeTypes(imageBase64: string): Observable<{ [key: string]: number }> {
